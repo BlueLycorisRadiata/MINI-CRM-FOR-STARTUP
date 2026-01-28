@@ -1,0 +1,28 @@
+<!doctype html>
+<html lang="vi" xmlns:th="http://www.thymeleaf.org">
+
+<head th:replace="~{fragments :: head('Đăng nhập')}"></head>
+
+<body class="bg-light">
+
+  <div class="container mt-5" style="max-width: 420px;">
+    <h3 class="mb-3">CRM nội bộ</h3>
+
+    <!-- Login Error Alert -->
+    <div th:replace="~{fragments/alerts :: loginErrorAlert()}"></div>
+
+    <!-- Logout Success Alert -->
+    <div th:replace="~{fragments/alerts :: logoutSuccessAlert()}"></div>
+
+    <!-- Login Form -->
+    <div th:replace="~{fragments/forms :: loginForm()}"></div>
+
+    <p class="text-muted mt-3 small mb-0">
+      Dev accounts: <code>admin/admin123</code>, <code>viewer/viewer123</code>
+    </p>
+  </div>
+
+  <div th:replace="~{fragments :: scripts}"></div>
+</body>
+
+</html>

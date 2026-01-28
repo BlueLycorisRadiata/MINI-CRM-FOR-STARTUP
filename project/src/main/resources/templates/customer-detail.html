@@ -1,0 +1,39 @@
+<!doctype html>
+<html lang="vi" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+
+<head th:replace="~{fragments :: head('Customer Detail')}"></head>
+
+<body>
+
+  <div th:replace="~{fragments :: navbar}"></div>
+
+  <div class="container py-4">
+
+    <!-- Back Link -->
+    <div th:replace="~{fragments/layout :: backLink(@{/dashboard}, '← Back to Dashboard')}"></div>
+
+    <div class="row g-3">
+      <!-- Left Column: Profile & Interaction Form -->
+      <div class="col-lg-4">
+        <!-- Customer Profile -->
+        <div th:replace="~{fragments/cards :: customerProfile(${user}, ${dtf})}"></div>
+
+        <!-- Add Interaction Form (Admin Only) -->
+        <div th:replace="~{fragments/cards :: interactionFormCard(${newInteraction}, ${user.id})}"></div>
+
+        <!-- Admin Required Alert (Non-Admin) -->
+        <div th:replace="~{fragments/alerts :: adminRequiredAlert()}"></div>
+      </div>
+
+      <!-- Right Column: Interaction Timeline -->
+      <div class="col-lg-8">
+        <div th:replace="~{fragments/cards :: interactionTimeline(${interactions}, ${dtf})}"></div>
+      </div>
+    </div>
+
+  </div>
+
+  <div th:replace="~{fragments :: scripts}"></div>
+</body>
+
+</html>

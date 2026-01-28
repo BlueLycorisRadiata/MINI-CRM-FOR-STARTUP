@@ -1,0 +1,40 @@
+<!doctype html>
+<html lang="vi" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+
+<body>
+
+    <!-- Viewer Alert (dashboard page) -->
+    <div th:fragment="viewerAlert()" class="alert alert-info mt-3 mb-0 small"
+        sec:authorize="hasRole('USER') and !hasRole('ADMIN')">
+        Bạn đang đăng nhập với quyền <strong>viewer</strong> (chỉ xem). Muốn thêm tương tác, hãy đăng nhập bằng
+        <code>admin</code>.
+    </div>
+
+    <!-- Admin Required Alert (customer detail page) -->
+    <div th:fragment="adminRequiredAlert()" class="alert alert-warning mt-3" sec:authorize="!hasRole('ADMIN')">
+        Bạn không có quyền thêm tương tác. Hãy đăng nhập bằng <code>admin</code>.
+    </div>
+
+    <!-- Error Alert (login page) -->
+    <div th:fragment="errorAlert(message)" class="alert alert-danger">
+        <span th:text="${message}">An error occurred</span>
+    </div>
+
+    <!-- Success Alert (login page) -->
+    <div th:fragment="successAlert(message)" class="alert alert-success">
+        <span th:text="${message}">Success!</span>
+    </div>
+
+    <!-- Login Error Alert -->
+    <div th:fragment="loginErrorAlert()" th:if="${param.error}" class="alert alert-danger">
+        Sai tài khoản hoặc mật khẩu.
+    </div>
+
+    <!-- Logout Success Alert -->
+    <div th:fragment="logoutSuccessAlert()" th:if="${param.logout}" class="alert alert-success">
+        Bạn đã logout.
+    </div>
+
+</body>
+
+</html>

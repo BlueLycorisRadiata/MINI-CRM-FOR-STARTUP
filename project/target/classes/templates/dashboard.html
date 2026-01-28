@@ -1,0 +1,88 @@
+<!doctype html>
+<html lang="vi" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+
+<head th:replace="~{fragments :: head('User Dashboard')}"></head>
+
+<body>
+
+  <div th:replace="~{fragments :: navbar}"></div>
+
+  <div class="container py-4">
+    <div class="d-flex align-items-center justify-content-between mb-3">
+      <div>
+        <h2 class="mb-1">User Dashboard</h2>
+        <div class="text-muted">Danh sách khách hàng và bộ lọc tìm kiếm.</div>
+      </div>
+      <div class="text-end">
+        <span class="badge text-bg-secondary" th:text="'Total: ' + ${users.size()}"></span>
+      </div>
+    </div>
+
+    <form class="card card-body mb-3" method="get" th:action="@{/dashboard}">
+      <div class="row g-2 align-items-end">
+        <div class="col-md-6">
+          <label class="form-label">Search (name / email)</label>
+          <input class="form-control" type="text" name="search" placeholder="Ví dụ: nguyen, a@company.com"
+            th:value="${search}">
+        </div>
+
+        <div class="col-md-4">
+          <label class="form-label">Tag filter</label>
+          <select class="form-select" name="tag">
+            <option value="" th:selected="${tag == ''}">-- All --</option>
+            <option th:each="t : ${tags}" th:value="${t}" th:text="${t}" th:selected="${t == tag}">
+            </option>
+          </select>
+        </div>
+
+        <div class="col-md-2 d-grid">
+          <button class="btn btn-primary" type="submit">Apply</button>
+          <a class="btn btn-link" th:href="@{/dashboard}">Reset</a>
+        </div>
+      </div>
+    </form>
+
+    <div class="card">
+      <div class="table-responsive">
+        <table class="table table-hover mb-0">
+          <thead class="table-light">
+            <tr>
+              <th style="width: 22%;">Name</th>
+              <th style="width: 28%;">Email</th>
+              <th style="width: 28%;">Tags</th>
+              <th style="width: 22%;">Created At</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr th:if="${users.isEmpty()}">
+              <td colspan="4" class="text-center text-muted py-4">
+                Không có user phù hợp bộ lọc.
+              </td>
+            </tr>
+
+            <tr th:each="u : ${users}">
+              <td>
+                <a th:href="@{/customers/{id}(id=${u.id})}" th:text="${u.name}">User</a>
+              </td>
+              <td th:text="${u.email}">email</td>
+              <td>
+                <span th:if="${u.tags.isEmpty()}" class="text-muted">--</span>
+                <span th:each="tg : ${u.tags}" class="badge text-bg-secondary me-1" th:text="${tg}">tag</span>
+              </td>
+              <td th:text="${dtf.format(u.createdAt)}">createdAt</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <div class="alert alert-info mt-3 mb-0 small" sec:authorize="hasRole('USER') and !hasRole('ADMIN')">
+      Bạn đang đăng nhập với quyền <strong>viewer</strong> (chỉ xem). Muốn thêm tương tác, hãy đăng nhập bằng
+      <code>admin</code>.
+    </div>
+  </div>
+
+  <div th:replace="~{fragments :: scripts}"></div>
+</body>
+
+</html>

@@ -1,0 +1,31 @@
+<!doctype html>
+<html lang="vi" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+
+<head th:replace="~{fragments :: head('User Dashboard')}"></head>
+
+<body>
+
+  <div th:replace="~{fragments :: navbar}"></div>
+
+  <div class="container py-4">
+    <!-- Page Header -->
+    <div
+      th:replace="~{fragments/layout :: pageHeader('User Dashboard', 'Danh sách khách hàng và bộ lọc tìm kiếm.', 'Total: ' + ${users.size()})}">
+    </div>
+
+    <!-- Search Form -->
+    <div th:replace="~{fragments/forms :: searchForm(${search}, ${tags}, ${tag})}"></div>
+
+    <!-- User List Table -->
+    <div class="card">
+      <div th:replace="~{fragments/tables :: userListTable(${users}, ${dtf})}"></div>
+    </div>
+
+    <!-- Viewer Alert -->
+    <div th:replace="~{fragments/alerts :: viewerAlert()}"></div>
+  </div>
+
+  <div th:replace="~{fragments :: scripts}"></div>
+</body>
+
+</html>
