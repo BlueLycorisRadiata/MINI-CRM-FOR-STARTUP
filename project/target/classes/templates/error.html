@@ -1,0 +1,54 @@
+<!doctype html>
+<html lang="vi" xmlns:th="http://www.thymeleaf.org">
+
+<head th:replace="~{fragments :: head('Lỗi - ' + ${status})}"></head>
+
+<body>
+
+    <div th:replace="~{fragments :: navbar}"></div>
+
+    <div class="container py-5">
+        <div class="row justify-content-center">
+            <div class="col-lg-6 text-center">
+                <!-- Generic Error -->
+                <div class="mb-4">
+                    <h1 class="display-1 fw-bold text-muted" th:text="${status} ?: 'Error'">Error</h1>
+                    <p class="fs-3 text-secondary">
+                        <span class="text-danger">Oops!</span> Có lỗi xảy ra
+                    </p>
+                    <p class="lead text-muted"
+                        th:text="${message} ?: 'Đã xảy ra lỗi không xác định. Vui lòng thử lại sau.'">
+                        An unexpected error occurred.
+                    </p>
+                </div>
+
+                <!-- Error Details (development mode) -->
+                <div th:if="${trace}" class="alert alert-warning text-start mb-4 small">
+                    <h6 class="alert-heading">Stack Trace (Dev Mode):</h6>
+                    <pre class="mb-0" style="max-height: 200px; overflow-y: auto;"
+                        th:text="${trace}">Stack trace...</pre>
+                </div>
+
+                <!-- Action Buttons -->
+                <div class="d-flex gap-2 justify-content-center">
+                    <a th:href="@{/dashboard}" class="btn btn-primary">
+                        <i class="bi bi-house-door"></i> Về Dashboard
+                    </a>
+                    <a href="javascript:history.back()" class="btn btn-outline-secondary">
+                        <i class="bi bi-arrow-left"></i> Quay lại
+                    </a>
+                </div>
+
+                <!-- Timestamp -->
+                <p class="text-muted mt-4 small">
+                    <span th:text="${timestamp}">Timestamp</span>
+                </p>
+
+            </div>
+        </div>
+    </div>
+
+    <div th:replace="~{fragments :: scripts}"></div>
+</body>
+
+</html>

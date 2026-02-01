@@ -1,0 +1,47 @@
+<!doctype html>
+<html lang="vi" xmlns:th="http://www.thymeleaf.org">
+
+<head th:replace="~{fragments :: head('500 - Lỗi máy chủ')}"></head>
+
+<body>
+
+    <div th:replace="~{fragments :: navbar}"></div>
+
+    <div class="container py-5">
+        <div class="row justify-content-center">
+            <div class="col-lg-6 text-center">
+                <!-- 500 Error Icon -->
+                <div class="mb-4">
+                    <h1 class="display-1 fw-bold text-muted">500</h1>
+                    <p class="fs-3 text-secondary">
+                        <span class="text-danger">Oops!</span> Lỗi máy chủ
+                    </p>
+                    <p class="lead text-muted">
+                        Đã xảy ra lỗi trong quá trình xử lý yêu cầu của bạn. Vui lòng thử lại sau.
+                    </p>
+                </div>
+
+                <!-- Error Details (only in dev mode) -->
+                <div th:if="${error}" class="alert alert-danger text-start mb-4">
+                    <h6 class="alert-heading">Chi tiết lỗi:</h6>
+                    <small th:text="${error}" class="font-monospace">Error details</small>
+                </div>
+
+                <!-- Action Buttons -->
+                <div class="d-flex gap-2 justify-content-center">
+                    <a th:href="@{/dashboard}" class="btn btn-primary">
+                        <i class="bi bi-house-door"></i> Về Dashboard
+                    </a>
+                    <a href="javascript:location.reload()" class="btn btn-outline-secondary">
+                        <i class="bi bi-arrow-clockwise"></i> Thử lại
+                    </a>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+    <div th:replace="~{fragments :: scripts}"></div>
+</body>
+
+</html>

@@ -1,0 +1,37 @@
+<!doctype html>
+<html lang="vi"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<body>
+
+<!-- Base Layout Fragment -->
+<div th:fragment="baseLayout(title, content)" th:remove="tag">
+  <!doctype html>
+  <html lang="vi" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+  <head th:replace="~{fragments :: head(${title})}"></head>
+  <body>
+    <div th:replace="~{fragments :: navbar}"></div>
+    <div th:replace="${content}"></div>
+    <div th:replace="~{fragments :: scripts}"></div>
+  </body>
+  </html>
+</div>
+
+<!-- Page Header Component -->
+<div th:fragment="pageHeader(title, subtitle, badge)" class="d-flex align-items-center justify-content-between mb-3">
+  <div>
+    <h2 class="mb-1" th:text="${title}">Page Title</h2>
+    <div class="text-muted" th:text="${subtitle}">Page description</div>
+  </div>
+  <div class="text-end" th:if="${badge != null}">
+    <span class="badge text-bg-secondary" th:text="${badge}">Badge</span>
+  </div>
+</div>
+
+<!-- Back Link Component -->
+<div th:fragment="backLink(url, text)" class="mb-3">
+  <a class="btn btn-link px-0" th:href="${url}" th:text="${text}">← Back</a>
+</div>
+
+</body>
+</html>
