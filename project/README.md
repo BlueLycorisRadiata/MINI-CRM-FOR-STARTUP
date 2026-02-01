@@ -44,3 +44,12 @@ Techstach mình sử dụng:
 SQL: MSSQL, ORM
 Backend: Java(Springboot)
 Frontend: Thymeleaf
+
+Q1: Vì sao chọn SQL Server?
+Độ tin cậy (ACID).
+Mô hình quan hệ mạnh mẽ cho dữ liệu User/Interaction.
+Các tính năng cấp doanh nghiệp (enterprise-grade).
+
+Q2: Schema có khả năng mở rộng không?
+Có. UUID giúp tránh xung đột ID trong các hệ thống phân tán.
+Đã có index trên các cột quan trọng (email, name, user_id, created_at).
